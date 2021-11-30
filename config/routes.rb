@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :user do
-    resorces :tweets, only[:new, create]
-  end
+  # resources :user do
+  #   resorces :tweets, only[:new, create]
+  # end
 
   get 'tweets/index'
   get 'tweets/new'
@@ -14,9 +14,12 @@ Rails.application.routes.draw do
   get 'users/new'
   get 'users/create'
   resources :users
-  # resources :sessions, only[:new,:create,
-  :destroy] 
+  resources :tweets
 
   
   root 'users#index'
+
+  resources :users do
+    resources :tweets, only: [:new,:create]
+  end
 end
